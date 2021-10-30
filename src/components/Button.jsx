@@ -4,7 +4,8 @@ import { colors } from '../materials/colors';
 export const Button = styled.button`
     border: 2px solid black;
     background-color: white;
-    font-size: 30px;
+    font-weight: 800;
+    font-size: calc(20px + 8vw);
     
     &:disabled {
       border: 2px solid ${colors.gray};
