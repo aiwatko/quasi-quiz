@@ -48,10 +48,10 @@ const Input = styled.input.attrs({ type: 'radio' })`
 `;
 
 export const InputRadio = ({
-  value, name, disabled, variant,
+  value, name, disabled, variant, onClick,
 }) => (
   <div>
-    <Input name={name} id={value} disabled={disabled} />
+    <Input name={name} id={value} disabled={disabled} onClick={onClick} value={value} />
     <Label htmlFor={value} variant={variant}><span>{value}</span></Label>
   </div>
 );
@@ -62,8 +62,9 @@ InputRadio.defaultProps = {
 };
 
 InputRadio.propTypes = {
+  onClick: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
-  variant: PropTypes.oneOf(['correct', 'incorrect']),
+  variant: PropTypes.oneOf(['correct', 'incorrect', 'default']),
 };

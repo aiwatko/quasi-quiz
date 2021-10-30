@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { spacing } from '../../materials/spacing';
 import { InputRadio } from '../../components/InputRadio';
@@ -12,11 +12,23 @@ const Container = styled.div`
     row-gap: ${spacing.medium};
 `;
 
-export const Play = () => (
-  <Container>
-    <InputRadio disabled name="play" value="A" />
-    <InputRadio name="play" value="B" />
-    <InputRadio variant="correct" name="play" value="C" />
-    <InputRadio variant="incorrect" name="play" value="D" />
-  </Container>
-);
+export const Play = () => {
+  const [selectedInput, setSelectedInput] = useState();
+
+  const handleClick = (e) => {
+    setSelectedInput(e.target.value);
+  };
+
+  return (
+    <Container>
+      {['A', 'B', 'C', 'D'].map((option) => (
+        <InputRadio
+          onClick={handleClick}
+          disabled={!!selectedInput && selectedInput !== option}
+          name="play"
+          value={option}
+        />
+      ))}
+    </Container>
+  );
+};
