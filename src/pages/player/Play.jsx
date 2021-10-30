@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { spacing } from '../../materials/spacing';
-import { Button } from '../../components/Button';
+import { InputRadio } from '../../components/InputRadio';
 
-const ButtonsContainer = styled.div`
+const Container = styled.div`
     display: grid;
     height: 100vh;
     padding: ${spacing.medium};
@@ -13,10 +13,10 @@ const ButtonsContainer = styled.div`
 `;
 
 export const Play = () => (
-  <ButtonsContainer>
-    <Button disabled>A</Button>
-    <Button>B</Button>
-    <Button variant="correct">C</Button>
-    <Button variant="incorrect">D</Button>
-  </ButtonsContainer>
+  <Container>
+    <InputRadio disabled name="play" value="A" />
+    <InputRadio name="play" value="B" />
+    <InputRadio variant="correct" name="play" value="C" />
+    <InputRadio variant="incorrect" name="play" value="D" />
+  </Container>
 );
