@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.js": "/quasi-quiz/static/js/main.644fe5ee.chunk.js",
-    "main.js.map": "/quasi-quiz/static/js/main.644fe5ee.chunk.js.map",
+    "main.js": "/quasi-quiz/static/js/main.48e37037.chunk.js",
+    "main.js.map": "/quasi-quiz/static/js/main.48e37037.chunk.js.map",
     "runtime-main.js": "/quasi-quiz/static/js/runtime-main.10eaef2a.js",
     "runtime-main.js.map": "/quasi-quiz/static/js/runtime-main.10eaef2a.js.map",
     "static/js/2.036bc76c.chunk.js": "/quasi-quiz/static/js/2.036bc76c.chunk.js",
@@ -12,6 +12,6 @@
   "entrypoints": [
     "static/js/runtime-main.10eaef2a.js",
     "static/js/2.036bc76c.chunk.js",
-    "static/js/main.644fe5ee.chunk.js"
+    "static/js/main.48e37037.chunk.js"
   ]
 }
