@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import { colors } from './materials/colors';
 
 export const GlobalStyle = createGlobalStyle`
     * {
@@ -7,10 +8,16 @@ export const GlobalStyle = createGlobalStyle`
     html { 
         height: 100%; 
     }
+
     body {
-        min-height: 100%;
+        height: 100%;
         margin: 0;
         padding: 0;
         font-family: Open-Sans, Helvetica, Sans-Serif;
+        color: ${colors.black};
+    }
+
+    #root {
+        height: 100%;
     }
 `;

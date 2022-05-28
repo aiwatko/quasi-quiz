@@ -25,7 +25,7 @@ export const Play = () => {
         <InputRadio
           onClick={handleClick}
           disabled={!!selectedInput && selectedInput !== option}
-          name="play"
+          name='play'
           value={option}
         />
       ))}
