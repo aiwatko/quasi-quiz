@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import { PageContainer } from '../../components/PageContainer';
 import { colors } from '../../materials/colors';
@@ -31,14 +30,19 @@ const Button = styled.button`
   border-radius: 3px;
 `;
 
-export const Welcome = ({ ws }) => {
+export const PlayerWelcome = () => {
+  const [ws, setWs] = useState();
   const [teamName, setTeamName] = useState('');
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setWs(new WebSocket('ws://localhost:5000/game?type=player'));
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     ws.send(JSON.stringify({ team: teamName }));
-    navigate('/play');
+    navigate('/player');
   };
 
   return (
@@ -51,8 +55,4 @@ export const Welcome = ({ ws }) => {
       </form>
     </PageContainer>
   );
-};
-
-Welcome.propTypes = {
-  ws: PropTypes.object.isRequired,
 };
