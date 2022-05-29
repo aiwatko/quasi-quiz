@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { PageContainer } from '../../components/PageContainer';
 import { colors } from '../../materials/colors';
 import { spacing } from '../../materials/spacing';
 
-const Title = styled.h1`
-  font-size: 30px;
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background: ${colors.black};
 `;
 
-const Label = styled.label`
-  display: block;
-  margin-bottom: ${spacing.medium};
+const Title = styled.h1`
+  font-size: 30px;
+  color: ${colors.white};
 `;
 
 const Input = styled.input`
@@ -22,11 +26,11 @@ const Input = styled.input`
 
 const Button = styled.button`
   padding: ${spacing.small} ${spacing.large};
-  background: ${colors.black};
-  color: ${colors.white};
+  background: ${colors.white};
+  color: ${colors.black};
   font-weight: 800;
   text-align: center;
-  border: 2px solid ${colors.black};
+  border: 2px solid ${colors.white};
   border-radius: 3px;
 `;
 
@@ -46,13 +50,12 @@ export const PlayerWelcome = () => {
   };
 
   return (
-    <PageContainer>
+    <Container>
       <Title>Welcome to QuasiQuiz!</Title>
       <form onSubmit={handleSubmit}>
-        <Label htmlFor="teamName"> Enter your team name: </Label>
-        <Input id="teamName" value={teamName} onChange={(e) => { setTeamName(e.target.value); }} />
-        <Button>play!</Button>
+        <Input placeholder="team name" id="teamName" value={teamName} onChange={(e) => { setTeamName(e.target.value); }} />
+        <Button>Play</Button>
       </form>
-    </PageContainer>
+    </Container>
   );
 };
