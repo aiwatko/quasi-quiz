@@ -23,9 +23,10 @@ export const Play = () => {
     <Container>
       {['A', 'B', 'C', 'D'].map((option) => (
         <InputRadio
+          key={`answer-${option}`}
           onClick={handleClick}
           disabled={!!selectedInput && selectedInput !== option}
-          name='play'
+          name="play"
           value={option}
         />
       ))}

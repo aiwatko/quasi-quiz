@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 import { PageContainer } from '../../components/PageContainer';
 import { colors } from '../../materials/colors';
 import { spacing } from '../../materials/spacing';
@@ -29,14 +31,15 @@ const Button = styled.button`
   border-radius: 3px;
 `;
 
-const handleSubmit = (e) => {
-  e.preventDefault();
-  // send team name to the backend
-  // route to play page
-};
-
-export const Welcome = () => {
+export const Welcome = ({ ws }) => {
   const [teamName, setTeamName] = useState('');
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    ws.send(JSON.stringify({ team: teamName }));
+    navigate('/play');
+  };
 
   return (
     <PageContainer>
@@ -48,4 +51,8 @@ export const Welcome = () => {
       </form>
     </PageContainer>
   );
+};
+
+Welcome.propTypes = {
+  ws: PropTypes.object.isRequired,
 };
