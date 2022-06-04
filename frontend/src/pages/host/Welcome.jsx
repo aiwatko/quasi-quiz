@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { colors } from '../../materials/colors';
-import { QUESTION } from '../../routes';
+import { QUESTION, WS_REGISTRATION } from '../../constants';
+import { Players } from '../../components/Players';
+import { spacing } from '../../materials/spacing';
 
 const Container = styled.div`
   display: flex;
@@ -21,23 +23,31 @@ const Title = styled.h1`
 const GameLink = styled(Link)`
   color: ${colors.white};
   font-size: calc(15px + 1vw);
+  margin-bottom: ${spacing.large};
 `;
 
 export const HostWelcome = () => {
   const [ws, setWs] = useState();
+  const [players, setPlayers] = useState([]);
 
   useEffect(() => {
-    setWs(new WebSocket('ws://localhost:5000/game?type=host'), () => {
-      ws.onmessage = (event) => {
-        console.log(JSON.parse(event.data));
-      };
-    });
+    setWs(new WebSocket(WS_REGISTRATION.host));
   }, []);
+
+  useEffect(() => {
+    if (ws) {
+      ws.onmessage = (event) => {
+        const data = JSON.parse(event.data);
+        setPlayers(data.players);
+      };
+    }
+  }, [ws]);
 
   return (
     <Container>
       <Title>Welcome to QuasiQuiz!</Title>
       <GameLink to={QUESTION}>Play</GameLink>
+      <Players players={players} variant="dark" />
     </Container>
   );
 };

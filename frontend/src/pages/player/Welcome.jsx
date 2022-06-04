@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { colors } from '../../materials/colors';
 import { spacing } from '../../materials/spacing';
-import { PLAYER } from '../../routes';
+import { PLAYER, WS_ACTIONS, WS_REGISTRATION } from '../../constants';
 
 const Container = styled.div`
   display: flex;
@@ -37,16 +37,16 @@ const Button = styled.button`
 
 export const PlayerWelcome = () => {
   const [ws, setWs] = useState();
-  const [teamName, setTeamName] = useState('');
+  const [playerName, setPlayerName] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
-    setWs(new WebSocket('ws://localhost:5000/game?type=player'));
+    setWs(new WebSocket(WS_REGISTRATION.player));
   }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    ws.send(JSON.stringify({ team: teamName }));
+    ws.send(JSON.stringify({ action: WS_ACTIONS.playerNameRegistration, playerName }));
     navigate(PLAYER);
   };
 
@@ -54,7 +54,7 @@ export const PlayerWelcome = () => {
     <Container>
       <Title>Welcome to QuasiQuiz!</Title>
       <form onSubmit={handleSubmit}>
-        <Input placeholder="team name" id="teamName" value={teamName} onChange={(e) => { setTeamName(e.target.value); }} />
+        <Input placeholder="player or team name" value={playerName} onChange={(e) => { setPlayerName(e.target.value); }} />
         <Button>Play</Button>
       </form>
     </Container>

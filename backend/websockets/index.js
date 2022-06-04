@@ -1,5 +1,5 @@
 import { WebSocketServer } from 'ws';
-import queryString from 'query-string';
+import { connectionHandler, messageHandller } from './actionHandlers.js';
 
 const handlePlayerMessage = () => {}
 const handleHostMessage = () => {}
@@ -17,41 +17,13 @@ export default async (server) => {
     });
   });
 
-  let hostConnection;
-
   websocketServer.on(
     'connection',
      (connection, req) => {
-      const [_path, params] = req?.url?.split('?');
-      const connectionParams = queryString.parse(params);
-
-      if (connectionParams.type === 'host') {
-        console.log('Host registered')
-      }
-
-      if (connectionParams.type === 'player') {
-        console.log('Player registered')
-      }
-
+      connectionHandler(connection, req);
+    
       connection.on('message', (message) => {
-        try {
-          const parsedMessage = JSON.parse(message)
-
-          if (connectionParams.type === 'host') {
-            hostConnection = connection;
-            handleHostMessage(connection, parsedMessage);
-            return;
-          }
-
-          if (connectionParams.type === 'player') {
-            handlePlayerMessage(connection, parsedMessage, hostConnection);
-            return;
-          }
-
-        } catch (e) {
-          console.log(e)
-          connection.send(JSON.stringify({ message: 'Message must be a JSON' }));
-        }
+        messageHandller(connection, message)
       });
     }
   );

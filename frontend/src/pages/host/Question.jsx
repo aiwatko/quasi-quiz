@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import { PageContainer } from '../../components/PageContainer';
+import { Players } from '../../components/Players';
 import { colors } from '../../materials/colors';
 import { spacing } from '../../materials/spacing';
 
 const question = 'How many tram lines are there in Zürich?';
 const answers = ['Lorem ipsum sin dolor amet', 11, 12, 16];
-const teams = ['galapagos', 'azores', 'sicily', 'lodz'];
 
 const Container = styled.div`
   display: flex;
@@ -36,21 +36,6 @@ const Answer = styled.div`
   font-size: calc(15px + 1vw);
 `;
 
-const TeamsContainer = styled.div`
-  margin-top: ${spacing.large};
-  display: flex;
-  gap: ${spacing.medium};
-`;
-
-const Team = styled.div`
-  border: 2px solid ${colors.black};
-  padding: ${spacing.medium};
-  flex: 1;
-  font-weight: 800;
-  font-size: calc(10px + 1vw);
-  text-align: center;
-`;
-
 export const Question = () => (
   <PageContainer>
     <Container>
@@ -58,9 +43,7 @@ export const Question = () => (
       <AnswersContainer>
         {answers.map((answer) => <Answer>{answer}</Answer>)}
       </AnswersContainer>
-      <TeamsContainer>
-        {teams.map((team) => <Team>{team}</Team>)}
-      </TeamsContainer>
+      <Players />
     </Container>
   </PageContainer>
 );
