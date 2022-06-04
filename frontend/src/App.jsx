@@ -5,16 +5,19 @@ import { Play } from './pages/player/Play';
 import { PlayerWelcome } from './pages/player/Welcome';
 import { HostWelcome } from './pages/host/Welcome';
 import { GlobalStyle } from './globalStyles';
+import {
+  GAME, HOST, PLAYER, QUESTION,
+} from './constants';
 
 const App = () => (
   <>
     <GlobalStyle />
     <Router>
       <Routes>
-        <Route path="/" element={<PlayerWelcome />} />
-        <Route path="/host" element={<HostWelcome />} />
-        <Route path="/question" element={<Question />} />
-        <Route path="/player" element={<Play />} />
+        <Route path={PLAYER} element={<PlayerWelcome />} />
+        <Route path={HOST} element={<HostWelcome />} />
+        <Route path={QUESTION} element={<Question />} />
+        <Route path={GAME} element={<Play />} />
       </Routes>
     </Router>
   </>

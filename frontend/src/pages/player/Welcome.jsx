@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { colors } from '../../materials/colors';
 import { spacing } from '../../materials/spacing';
+import { PLAYER } from '../../routes';
 
 const Container = styled.div`
   display: flex;
@@ -46,7 +47,7 @@ export const PlayerWelcome = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     ws.send(JSON.stringify({ team: teamName }));
-    navigate('/player');
+    navigate(PLAYER);
   };
 
   return (

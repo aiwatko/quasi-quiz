@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { colors } from '../../materials/colors';
+import { QUESTION } from '../../routes';
 
 const Container = styled.div`
   display: flex;
@@ -36,7 +37,7 @@ export const HostWelcome = () => {
   return (
     <Container>
       <Title>Welcome to QuasiQuiz!</Title>
-      <GameLink to="/question">Play</GameLink>
+      <GameLink to={QUESTION}>Play</GameLink>
     </Container>
   );
 };
