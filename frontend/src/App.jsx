@@ -12,7 +12,9 @@ import {
 export const Context = createContext();
 
 const App = () => {
-  const [context, setContext] = useState({});
+  const [context, setContext] = useState({
+    players: [],
+  });
 
   return (
     <Context.Provider value={[context, setContext]}>

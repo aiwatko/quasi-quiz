@@ -3,13 +3,13 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { colors } from '../../materials/colors';
 import { spacing } from '../../materials/spacing';
-import { PLAYER, WS_ACTIONS, WS_REGISTRATION } from '../../constants';
+import { GAME, WS_ACTIONS, WS_REGISTRATION } from '../../constants';
 import { Context } from '../../App';
 
 const Container = styled.div`
   display: flex;
+  padding: ${spacing.large};
   flex-direction: column;
-  align-items: center;
   justify-content: center;
   height: 100%;
   background: ${colors.black};
@@ -21,19 +21,28 @@ const Title = styled.h1`
 `;
 
 const Input = styled.input`
-  height: ${spacing.large};
+  // height: 29px;
   padding: ${spacing.medium} ${spacing.small};
   margin-right: ${spacing.large};
+  background: ${colors.black};
+  color: ${colors.white};
+  border: 2px solid ${colors.white};
+  font-size: 15px;
+  border-radius: 0;
+
+  ::placeholder,
+  ::-webkit-input-placeholder {
+    color: white;
+  }
 `;
 
 const Button = styled.button`
-  padding: ${spacing.small} ${spacing.large};
-  background: ${colors.white};
-  color: ${colors.black};
-  font-weight: 800;
-  text-align: center;
+  padding: ${spacing.medium} ${spacing.xLarge};
+  background: ${colors.black};
+  color: ${colors.white};
   border: 2px solid ${colors.white};
-  border-radius: 3px;
+  font-size: 15px;
+  text-align: center;
 `;
 
 export const PlayerWelcome = () => {
@@ -53,7 +62,7 @@ export const PlayerWelcome = () => {
     context.playerWs.send(
       JSON.stringify({ action: WS_ACTIONS.playerNameRegistration, playerName }),
     );
-    navigate(PLAYER);
+    navigate(GAME);
   };
 
   return (
@@ -61,7 +70,7 @@ export const PlayerWelcome = () => {
       <Title>Welcome to QuasiQuiz!</Title>
       <form onSubmit={handleSubmit}>
         <Input placeholder="player or team name" value={playerName} onChange={(e) => { setPlayerName(e.target.value); }} />
-        <Button>Play</Button>
+        <Button>play</Button>
       </form>
     </Container>
   );
