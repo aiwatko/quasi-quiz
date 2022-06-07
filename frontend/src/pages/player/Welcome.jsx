@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { colors } from '../../materials/colors';
 import { spacing } from '../../materials/spacing';
 import { PLAYER, WS_ACTIONS, WS_REGISTRATION } from '../../constants';
+import { Context } from '../../App';
 
 const Container = styled.div`
   display: flex;
@@ -36,17 +37,22 @@ const Button = styled.button`
 `;
 
 export const PlayerWelcome = () => {
-  const [ws, setWs] = useState();
+  const [context, setContext] = useContext(Context);
+
   const [playerName, setPlayerName] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
-    setWs(new WebSocket(WS_REGISTRATION.player));
+    setContext({
+      ...context, playerWs: new WebSocket(WS_REGISTRATION.player),
+    });
   }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    ws.send(JSON.stringify({ action: WS_ACTIONS.playerNameRegistration, playerName }));
+    context.playerWs.send(
+      JSON.stringify({ action: WS_ACTIONS.playerNameRegistration, playerName }),
+    );
     navigate(PLAYER);
   };
 

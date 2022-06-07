@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { colors } from '../../materials/colors';
 import { QUESTION, WS_REGISTRATION } from '../../constants';
 import { Players } from '../../components/Players';
 import { spacing } from '../../materials/spacing';
+import { Context } from '../../App';
 
 const Container = styled.div`
   display: flex;
@@ -27,27 +28,26 @@ const GameLink = styled(Link)`
 `;
 
 export const HostWelcome = () => {
-  const [ws, setWs] = useState();
-  const [players, setPlayers] = useState([]);
+  const [context, setContext] = useContext(Context);
 
   useEffect(() => {
-    setWs(new WebSocket(WS_REGISTRATION.host));
+    setContext({ ...context, hostWs: new WebSocket(WS_REGISTRATION.host) });
   }, []);
 
   useEffect(() => {
-    if (ws) {
-      ws.onmessage = (event) => {
+    if (context.hostWs) {
+      context.hostWs.onmessage = (event) => {
         const data = JSON.parse(event.data);
-        setPlayers(data.players);
+        setContext({ ...context, players: data.players });
       };
     }
-  }, [ws]);
+  }, [context]);
 
   return (
     <Container>
       <Title>Welcome to QuasiQuiz!</Title>
       <GameLink to={QUESTION}>Play</GameLink>
-      <Players players={players} variant="dark" />
+      <Players players={context.players} variant="dark" />
     </Container>
   );
 };

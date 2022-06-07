@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { colors } from '../materials/colors';
 import { spacing } from '../materials/spacing';
+import { Context } from '../App';
 
 const PlayersContainer = styled.div`
   margin-top: ${spacing.large};
@@ -25,20 +26,20 @@ const Player = styled.div`
   text-align: center;
 `;
 
-export const Players = ({
-  players, variant,
-}) => (
-  <PlayersContainer>
-    {players.map((player) => <Player variant={variant} key={player}>{player}</Player>)}
-  </PlayersContainer>
-);
+export const Players = ({ variant }) => {
+  const [context] = useContext(Context);
+
+  return (
+    <PlayersContainer>
+      {context.players.map((player) => <Player variant={variant} key={player}>{player}</Player>)}
+    </PlayersContainer>
+  );
+};
 
 Players.defaultProps = {
-  players: [],
   variant: 'bright',
 };
 
 Players.propTypes = {
-  players: PropTypes.array,
   variant: PropTypes.string,
 };
