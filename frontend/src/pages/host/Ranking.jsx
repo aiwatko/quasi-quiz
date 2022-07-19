@@ -30,8 +30,8 @@ export const Ranking = () => {
         <div>
           <Title>Ranking</Title>
           {context.players.map((player) => (
-            <Score key={player}>
-              {player}
+            <Score key={player.id}>
+              {player.name}
               : 0
             </Score>
           ))}

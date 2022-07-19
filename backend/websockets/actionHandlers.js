@@ -1,5 +1,13 @@
 import queryString from 'query-string';
+import { v4 } from 'uuid';
 
+const HOST_ACTIONS = {
+  players: 'players'
+}
+
+const PLAYER_ACTIONS = {
+  playerId: 'playerId'
+}
 
 const players = []
 let hostConnection;
@@ -16,7 +24,7 @@ export const connectionHandler = (connection, req) => {
       console.log('player registered')
       break;
     default:
-      console.log('incorrect action provided')
+      console.log('incorrect connection action provided')
       break;
   }
 }
@@ -27,13 +35,15 @@ export const messageHandller = (connection, message) => {
 
     switch (parsedMessage.action) {
       case 'playerNameRegistration':
-        players.push(parsedMessage.playerName);
-        hostConnection.send(JSON.stringify({ players }));
+        const id = v4()
+        players.push({ id, name: parsedMessage.playerName });
+        hostConnection.send(JSON.stringify({ action: HOST_ACTIONS.players, players }));
+        connection.send(JSON.stringify({ action: PLAYER_ACTIONS.playerId, id }))
 
         console.log('player registered');
         break;
       default:
-        console.log('incorrect action provided');
+        console.log('incorrect message action provided');
         break;
     }
 

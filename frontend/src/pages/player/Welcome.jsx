@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import { Context } from '../../App';
+import { playerMessageHandler } from '../../actionHanlders';
+import { GAME, WS_ACTIONS, WS_REGISTRATION } from '../../constants';
 import { colors } from '../../materials/colors';
 import { spacing } from '../../materials/spacing';
-import { GAME, WS_ACTIONS, WS_REGISTRATION } from '../../constants';
-import { Context } from '../../App';
 
 const Container = styled.div`
   display: flex;
@@ -56,6 +57,12 @@ export const PlayerWelcome = () => {
       ...context, playerWs: new WebSocket(WS_REGISTRATION.player),
     });
   }, []);
+
+  useEffect(() => {
+    if (context.playerWs) {
+      context.playerWs.onmessage = (message) => playerMessageHandler(message, context, setContext);
+    }
+  }, [context]);
 
   const handleSubmit = (e) => {
     e.preventDefault();

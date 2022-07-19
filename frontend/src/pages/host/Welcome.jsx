@@ -1,11 +1,12 @@
 import React, { useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { colors } from '../../materials/colors';
+import { Context } from '../../App';
+import { hostMessageHandler } from '../../actionHanlders';
 import { QUESTION, WS_REGISTRATION } from '../../constants';
 import { Players } from '../../components/Players';
+import { colors } from '../../materials/colors';
 import { spacing } from '../../materials/spacing';
-import { Context } from '../../App';
 
 const Container = styled.div`
   display: flex;
@@ -36,10 +37,7 @@ export const HostWelcome = () => {
 
   useEffect(() => {
     if (context.hostWs) {
-      context.hostWs.onmessage = (event) => {
-        const data = JSON.parse(event.data);
-        setContext({ ...context, players: data.players });
-      };
+      context.hostWs.onmessage = (message) => hostMessageHandler(message, context, setContext);
     }
   }, [context]);
 
