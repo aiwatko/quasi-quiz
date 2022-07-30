@@ -31,8 +31,8 @@ export const Players = ({ variant }) => {
 
   return (
     <PlayersContainer>
-      {context.players.map((player) => (
-        <Player variant={variant} key={player.id}>{player.name}</Player>
+      {Object.entries(context.players).map((player) => (
+        <Player variant={variant} key={player[0]}>{player[1].name}</Player>
       ))}
     </PlayersContainer>
   );

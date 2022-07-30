@@ -29,9 +29,9 @@ export const Ranking = () => {
       <Container>
         <div>
           <Title>Ranking</Title>
-          {context.players.map((player) => (
-            <Score key={player.id}>
-              {player.name}
+          {Object.entries(context.players).map((player) => (
+            <Score key={player[0]}>
+              {player[1].name}
               : 0
             </Score>
           ))}

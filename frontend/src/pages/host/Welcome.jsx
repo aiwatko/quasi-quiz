@@ -45,7 +45,7 @@ export const HostWelcome = () => {
     <Container>
       <Title>Welcome to QuasiQuiz!</Title>
       <GameLink to={QUESTION}>Play</GameLink>
-      <Players players={context.players} variant="dark" />
+      <Players variant="dark" />
     </Container>
   );
 };
