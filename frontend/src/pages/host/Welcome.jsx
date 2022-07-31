@@ -1,14 +1,12 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { Context } from '../../App';
-import { hostMessageHandler } from '../../actionHanlders';
-import {
-  CATEGORY, WS_REGISTRATION,
-} from '../../constants';
+import { CATEGORY } from '../../constants';
 import { Players } from '../../components/Players';
 import { colors } from '../../materials/colors';
 import { spacing } from '../../materials/spacing';
+import { registerHost } from '../../ws/actions';
+import { Context } from '../../App';
 
 const Container = styled.div`
   display: flex;
@@ -17,31 +15,24 @@ const Container = styled.div`
   justify-content: center;
   height: 100%;
   background: ${colors.black};
+  color: ${colors.white};
 `;
 
 const Title = styled.h1`
   font-size: calc(30px + 1vw);
-  color: ${colors.white};
 `;
 
 const GameLink = styled(Link)`
-  color: ${colors.white};
   font-size: calc(15px + 1vw);
   margin-bottom: ${spacing.large};
 `;
 
 export const HostWelcome = () => {
-  const [context, setContext] = useContext(Context);
+  const [_, setContext] = useContext(Context);
 
   useEffect(() => {
-    setContext({ ...context, hostWs: new WebSocket(WS_REGISTRATION.host) });
+    registerHost(setContext);
   }, []);
-
-  useEffect(() => {
-    if (context.hostWs) {
-      context.hostWs.onmessage = (message) => hostMessageHandler(message, context, setContext);
-    }
-  }, [context]);
 
   return (
     <Container>

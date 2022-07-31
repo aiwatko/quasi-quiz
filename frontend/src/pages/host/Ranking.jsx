@@ -24,6 +24,7 @@ const Score = styled.div`
 
 export const Ranking = () => {
   const [context] = useContext(Context);
+
   return (
     <PageContainer>
       <Container>

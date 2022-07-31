@@ -2,10 +2,10 @@ import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { Context } from '../../App';
-import { playerMessageHandler } from '../../actionHanlders';
-import { GAME, WS_ACTIONS, WS_REGISTRATION } from '../../constants';
+import { GAME } from '../../constants';
 import { colors } from '../../materials/colors';
 import { spacing } from '../../materials/spacing';
+import { registerPlayer, sendPlayerName } from '../../ws/actions';
 
 const Container = styled.div`
   display: flex;
@@ -22,7 +22,6 @@ const Title = styled.h1`
 `;
 
 const Input = styled.input`
-  // height: 29px;
   padding: ${spacing.medium} ${spacing.small};
   margin-right: ${spacing.large};
   background: ${colors.black};
@@ -53,22 +52,12 @@ export const PlayerWelcome = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    setContext({
-      ...context, playerWs: new WebSocket(WS_REGISTRATION.player),
-    });
+    registerPlayer(setContext);
   }, []);
-
-  useEffect(() => {
-    if (context.playerWs) {
-      context.playerWs.onmessage = (message) => playerMessageHandler(message, context, setContext);
-    }
-  }, [context]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    context.playerWs.send(
-      JSON.stringify({ action: WS_ACTIONS.playerNameRegistration, name }),
-    );
+    sendPlayerName(context, name);
     navigate(GAME);
   };
 

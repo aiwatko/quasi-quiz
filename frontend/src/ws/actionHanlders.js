@@ -1,20 +1,20 @@
-export const hostMessageHandler = (message, context, setContext) => {
+export const hostMessageHandler = (message, setContext) => {
   try {
     const parsedMessage = JSON.parse(message.data);
 
     switch (parsedMessage.action) {
       case 'players':
-        setContext({
-          ...context,
+        setContext((prevContext) => ({
+          ...prevContext,
           players: parsedMessage.players,
-        });
+        }));
         break;
       case 'questions':
-        setContext({
-          ...context,
+        setContext((prevContext) => ({
+          ...prevContext,
           questions: parsedMessage.questions,
           currentQuestion: parsedMessage.questions[0],
-        });
+        }));
         break;
       default:
         console.log('incorrect action provided:', parsedMessage.action);
@@ -25,16 +25,16 @@ export const hostMessageHandler = (message, context, setContext) => {
   }
 };
 
-export const playerMessageHandler = (message, context, setContext) => {
+export const playerMessageHandler = (message, setContext) => {
   try {
     const parsedMessage = JSON.parse(message.data);
 
     switch (parsedMessage.action) {
       case 'player_id':
-        setContext({
-          ...context,
+        setContext((prevContext) => ({
+          ...prevContext,
           currentPlayerId: parsedMessage.id,
-        });
+        }));
         break;
       default:
         console.log('incorrect action provided:', parsedMessage.action);
