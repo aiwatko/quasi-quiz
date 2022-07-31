@@ -1,0 +1,254 @@
+[
+  {
+    "category": "Video games",
+    "time": 24,
+    "question": "The first FIFA was released in…",
+    "id": "0E3026F6-222E-4D1E-8830-635AA993922C",
+    "answers": [
+      "1994", 
+      "1993", 
+      "1995", 
+      "1996"
+    ]
+  },
+  {
+    "category": "Switzerland",
+    "time": 24,
+    "question": "What did the Swiss vote on the 30th of November?",
+    "id": "4B728475-9ADB-497C-A945-0F95628D3CFD",
+    "answers": [
+      "gold reserves, immigration cap, flat tax abolition",
+      "unified health insurance fund, minimum wage, primary health care",
+      "minimum wage, immigration cap, flat tax abolition",
+      "unified health insurance fund, gold reserves"
+    ]
+  },
+  {
+    "category": "Traveling",
+    "time": 24,
+    "question": "What is true about Ebola?",
+    "id": "752D86D9-8225-4D63-8908-5D2437AD7E9B",
+    "answers": [
+      "The most hit country in 2014 is Sierra Leone",
+      "It has killed more than 11000 people in 2014",
+      "It has hit 5 countries in 2014",
+      "It first appeared in 1988"
+    ]
+  },
+  {
+    "category": "Ageing",
+    "time": 24,
+    "question": "What happens when you turn 26?",
+    "id": "E4A07941-A550-4FEA-9FD8-4E8021FA95A7", 
+    "answers": [
+      "No more Louvre for free and discounted InterRail ticket",
+      "Italians can vote for Senate and Swiss for referendum",
+      "No more discounted Zürich transportation system yearly pass",
+      "You can be granted a green card for the US"
+    ]
+  },
+  {
+    "category": "Animals",
+    "time": 24,
+    "question": "What is true about life spans, on average?",
+    "id": "4490E778-0C08-461B-B32C-4C9EDC742D6D",
+    "answers": [
+      "An eagle lives longer than a horse",
+      "A cobra lives shorter than a wolf",
+      "A lion lives longer than a catfish",
+      "A swan lives shorter than an elephant"
+    ]
+  },
+  {
+    "category": "Shopping",
+    "time": 24,
+    "question": "Which of the following is not an IKEA item?",
+    "id": "F9BB2F4E-82F2-4739-B0E7-00EF29D4821F",
+    "answers": [
+      "Termnes",
+      "Galant",
+      "Billy",
+      "Borgsjö"
+    ]
+  },
+  {
+    "category": "Hochdeutsch",
+    "time": 24,
+    "question": "How would you say 'a moment please' in German?",
+    "id": "38CBF2A6-999D-4CB2-8892-5C87B2086E60",
+    "answers": [
+      "Einen Moment bitte",
+      "Ein Moment bitte",
+      "Eine Moment bitte",
+      "Eine Naturwissenschaft bitte"
+    ]
+  },
+  {
+    "category": "Geography",
+    "time": 24,
+    "question": "In which country is Cartagena?",
+    "id": "A887F858-0BF1-408A-BDB6-2FDEFC8B22BB",
+    "answers": [
+      "Colombia",
+      "Mexico",
+      "Bolivia",
+      "Chile"
+    ]
+  },
+  {
+    "category": "Names",
+    "time": 24,
+    "question": "Spot the wrong (country)-(most used male first name) association",
+    "id": "926CFA0A-F91E-4B5D-8668-C80D0A169265",
+    "answers": [
+      "(Germany)-(Jakob)",
+      "(England)-(Harry)",
+      "(Italy)-(Francesco)",
+      "(France)-(Nathan)"
+    ]
+  },
+  {
+    "category": "Sharing economy",
+    "time": 24,
+    "question": "What is false about Couchsurfing?",
+    "id": "928530D5-60DB-4C90-9990-0BB43F77692A",
+    "answers": [
+      "It is a non-profit organization",
+      "The average age of participation is 28",
+      "Paris has the largest number of registered Couchsurfers",
+      "A police officer raped couchsurfers in Padova last year"
+    ]
+  },
+  {
+    "category": "Video games",
+    "time": 24,
+    "question": "Which of the following Pokemon’s evolution schemes is wrong?",
+    "id": "3B3034DE-30B6-4FC5-80AF-0210E743C95C",
+    "answers": [
+      "Geodude -> Golem -> Graveler",
+      "Poliwag -> Poliwhirl -> Poliwrath",
+      "Gastly -> Haunter -> Gengar",
+      "Dratini -> Dragonair -> Dragonite"
+    ]
+  },
+  {
+    "category": "Switzerland",
+    "time": 24,
+    "question": "Who among these people was not born in Switzerland?",
+    "id": "8D1D72C3-9D9A-4E63-A65F-84FE18ED1B2D",
+    "answers": [
+      "Joseph-Louis Lagrange",
+      "Wilhelm Tell",
+      "Le Corbusier",
+      "Leonhard Euler"
+    ]
+  },
+  {
+    "category": "Traveling",
+    "time": 30,
+    "question": "What is the longest route?",
+    "id": "CCF2ADE6-066B-4430-B261-4DA9E03705AC",
+    "answers": [
+      "SDY-SFO",
+      "MPX-BKK",
+      "ZRH-HKG",
+      "ATH-OTP"
+    ]
+  },
+  {
+    "category": "Ageing",
+    "time": 24,
+    "question": "Sort the countries by life expectancy (higher to lower)",
+    "id": "3E3A78FA-C635-445B-91D3-F3BB50311892",
+    "answers": [
+      "Japan - Switzerland - Italy - Germany",
+      "Switzerland - Finland - Mexico - Greece",
+      "Israel - France - South Korea - Italy",
+      "France - Germany - Italy - Canada"
+    ]
+  },
+  {
+    "category": "Animals",
+    "time": 24,
+    "question": "Sort the animals by sleeping time (longer to shorter)",
+    "id": "ECA8D8DF-9E8E-418B-8357-05BE9F72A675",
+    "answers": [
+      "tiger - pig - giraffe",
+      "cat — cow - bat",
+      "donkey - lion - squirrel",
+      "goat - dog - dolphin"
+    ]
+  },
+  {
+    "category": "Shopping",
+    "time": 24,
+    "question": "Why is Migros called Migros?",
+    "id": "537CA112-6177-4490-A2AA-648B52C362AA",
+    "answers": [
+      "from the French 'mi' (half) and 'gros' (wholesale)",
+      "from Laurent Migros, who founded the chain in 1926",
+      "becuase it was initially tailored for low-income immigrants",
+      "from the Romansh word 'migrosso' (large)"
+    ]
+    },
+  {
+    "category": "Hochdeutsch",
+    "time": 24,
+    "question": "What is the paradigm of the verb 'fangen'?",
+    "id": "E5DE4217-3BEF-4ADF-921A-FA74036D22EE",
+    "answers": [
+      "fangen - fing - gefangen",
+      "fangen - fung - gefangen",
+      "fangen - fang - gefangen",
+      "fangen - fong - gefongen"
+    ]
+  },
+  {
+    "category": "Geography",
+    "time": 24,
+    "question": "Which of these city has the highest density?",
+    "id": "9DBC8CD2-8854-458B-B690-E8CF987B0A6B",
+    "answers": [
+      "Paris",
+      "Barcelona",
+      "Naples",
+      "Zürich"
+    ]
+  },
+  {
+    "category": "Names",
+    "time": 24,
+    "question": "What is the most common last name in Switzerland?",
+    "id": "FC3A7E04-B55A-4A65-9C41-A693846127DD",
+    "answers": [
+      "Müller",
+      "Meier",
+      "Schmid",
+      "Keller"
+    ]
+  },
+  {
+    "category": "Sharing economy",
+    "time": 24,
+    "question": "What is false about Airbnb?",
+    "id": "6D3BDE18-CA31-4163-BA22-650B5F7B0091",
+    "answers": [
+      "It was founded in 2002",
+      "Every night about 150,000 people use it",
+      "In 2014 it will offer more rooms than the Hilton",
+      "It takes a commission on the price paid by the guest"
+    ]
+  },
+  {
+    "category": "Switzerland",
+    "time": 24,
+    "question": "Which of the following fines is wrong?",
+    "id": "8E811006-7D35-4AA0-AE43-68C0C074A5C4",
+    "answers": [
+      "11 km/h beyond speed limit by car in built up area = 120 CHF",
+      "crossing the red light by car = 250 CHF",
+      "traveling in the tram without ticket = 90 CHF",
+      "biking without Velovignette on your bike = 40 CHF"
+    ]
+  }
+]

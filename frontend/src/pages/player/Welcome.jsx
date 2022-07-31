@@ -49,7 +49,7 @@ const Button = styled.button`
 export const PlayerWelcome = () => {
   const [context, setContext] = useContext(Context);
 
-  const [playerName, setPlayerName] = useState('');
+  const [name, setName] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -67,7 +67,7 @@ export const PlayerWelcome = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     context.playerWs.send(
-      JSON.stringify({ action: WS_ACTIONS.playerNameRegistration, playerName }),
+      JSON.stringify({ action: WS_ACTIONS.playerNameRegistration, name }),
     );
     navigate(GAME);
   };
@@ -76,7 +76,7 @@ export const PlayerWelcome = () => {
     <Container>
       <Title>Welcome to QuasiQuiz!</Title>
       <form onSubmit={handleSubmit}>
-        <Input placeholder="player or team name" value={playerName} onChange={(e) => { setPlayerName(e.target.value); }} />
+        <Input placeholder="player or team name" value={name} onChange={(e) => { setName(e.target.value); }} />
         <Button>play</Button>
       </form>
     </Container>

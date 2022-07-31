@@ -8,24 +8,24 @@ import websockets
 
 players = {}
 host_connection = None
+QUESTIONS_FILE = 'sample_questions.json'
 
-HOST_ACTIONS = {
-  'players': 'players'
-}
-
-PLAYER_ACTIONS = {
-  'playerId': 'playerId'
-}
+def read_questions(file):
+  with open(file) as json_file:
+    return json.load(json_file)
 
 
-def handle_connection(websocket):
+async def handle_connection(websocket):
   type = parse_qs(urlparse(websocket.path)[4])['type'][0]
   
   match type:
     case 'host':
       global host_connection
       host_connection = websocket
-      print('host registered')
+
+      questions = read_questions(QUESTIONS_FILE)
+      await host_connection.send(json.dumps({ 'action': 'questions', 'questions': questions }))
+      print('host registered - questions sent to the host')
     case 'player':
       players[str(websocket.id)] = {}
       print('player registered')
@@ -34,29 +34,31 @@ def handle_connection(websocket):
 
 
 async def handle_message(websocket, message):
-  parsedMessage = json.loads(message)
-  match parsedMessage['action']:
-    case 'playerNameRegistration':
-      players[str(websocket.id)]['name'] = parsedMessage['playerName']
+  parsed_message = json.loads(message)
+  player_id = str(websocket.id)
+
+  match parsed_message['action']:
+    case 'player_name_registration':
+      players[player_id]['name'] = parsed_message['name']
 
       global host_connection
-      await host_connection.send(json.dumps({ 'action': HOST_ACTIONS['players'], 'players': players }))
-      await websocket.send(json.dumps({ 'action': PLAYER_ACTIONS['playerId'], 'id': str(websocket.id) }))
+      await host_connection.send(json.dumps({ 'action': 'players', 'players': players }))
+      await websocket.send(json.dumps({ 'action': 'player_id', 'id': player_id }))
       print('player name registered')
     case _:
       print('incorrect message action provided') 
 
 
 async def handler(websocket):
-    handle_connection(websocket)
+    await handle_connection(websocket)
 
     async for message in websocket:
         await handle_message(websocket, message)
 
 
 async def main():
-    async with websockets.serve(handler, "", 5000):
-        await asyncio.Future()  # run forever
+  async with websockets.serve(handler, "", 5000):
+      await asyncio.Future()  # run forever
 
 
 if __name__ == "__main__":

@@ -1,9 +1,11 @@
 import React, { useEffect, useContext } from 'react';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { Context } from '../../App';
 import { hostMessageHandler } from '../../actionHanlders';
-import { QUESTION, WS_REGISTRATION } from '../../constants';
+import {
+  CATEGORY, WS_REGISTRATION,
+} from '../../constants';
 import { Players } from '../../components/Players';
 import { colors } from '../../materials/colors';
 import { spacing } from '../../materials/spacing';
@@ -44,7 +46,7 @@ export const HostWelcome = () => {
   return (
     <Container>
       <Title>Welcome to QuasiQuiz!</Title>
-      <GameLink to={QUESTION}>Play</GameLink>
+      <GameLink to={CATEGORY}>Play</GameLink>
       <Players variant="dark" />
     </Container>
   );

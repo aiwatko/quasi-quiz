@@ -1,12 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
+import { Context } from '../../App';
 import { PageContainer } from '../../components/PageContainer';
 import { Players } from '../../components/Players';
 import { colors } from '../../materials/colors';
 import { spacing } from '../../materials/spacing';
-
-const question = 'How many tram lines are there in Zürich?';
-const answers = ['Lorem ipsum sin dolor amet', 11, 12, 16];
 
 const Container = styled.div`
   display: flex;
@@ -36,14 +34,19 @@ const Answer = styled.div`
   font-size: calc(15px + 1vw);
 `;
 
-export const Question = () => (
-  <PageContainer>
-    <Container>
-      <Title>{question}</Title>
-      <AnswersContainer>
-        {answers.map((answer) => <Answer>{answer}</Answer>)}
-      </AnswersContainer>
-      <Players />
-    </Container>
-  </PageContainer>
-);
+export const Question = () => {
+  const [context] = useContext(Context);
+  const { question, answers } = context.currentQuestion;
+
+  return (
+    <PageContainer>
+      <Container>
+        <Title>{question}</Title>
+        <AnswersContainer>
+          {answers.map((answer) => <Answer>{answer}</Answer>)}
+        </AnswersContainer>
+        <Players />
+      </Container>
+    </PageContainer>
+  );
+};

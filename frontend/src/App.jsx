@@ -4,9 +4,11 @@ import { Play } from './pages/player/Play';
 import { PlayerWelcome } from './pages/player/Welcome';
 import { Question } from './pages/host/Question';
 import { HostWelcome } from './pages/host/Welcome';
+import { Category } from './pages/host/Category';
 import { Ranking } from './pages/host/Ranking';
 import { GlobalStyle } from './globalStyles';
 import {
+  CATEGORY,
   GAME, HOST, PLAYER, QUESTION, RANKING,
 } from './constants';
 
@@ -25,6 +27,7 @@ const App = () => {
           <Route path={PLAYER} element={<PlayerWelcome />} />
           <Route path={GAME} element={<Play />} />
           <Route path={HOST} element={<HostWelcome />} />
+          <Route path={CATEGORY} element={<Category />} />
           <Route path={QUESTION} element={<Question />} />
           <Route path={RANKING} element={<Ranking />} />
         </Routes>
