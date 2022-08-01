@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { Context } from '../../App';
+import { Countdown } from '../../components/Countdown';
 import { PageContainer } from '../../components/PageContainer';
 import { Players } from '../../components/Players';
 import { colors } from '../../materials/colors';
@@ -10,6 +11,12 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
+`;
+
+const Timer = styled.div`
+  font-size: calc(20px + 2vw);
+  font-weight: bold;
+  align-self: flex-end;
 `;
 
 const Title = styled.h1`
@@ -36,11 +43,12 @@ const Answer = styled.div`
 
 export const Question = () => {
   const [context] = useContext(Context);
-  const { question, answers } = context.currentQuestion;
+  const { question, answers, time } = context.currentQuestion;
 
   return (
     <PageContainer>
       <Container>
+        <Timer><Countdown time={time} /></Timer>
         <Title>{question}</Title>
         <AnswersContainer>
           {answers.map((answer) => <Answer>{answer}</Answer>)}

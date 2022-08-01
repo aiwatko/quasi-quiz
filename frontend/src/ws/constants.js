@@ -6,4 +6,5 @@ export const WS_REGISTRATION = {
 
 export const WS_ACTIONS = {
   playerNameRegistration: 'player_name_registration',
+  buttonsOff: 'buttons_off',
 };

@@ -17,6 +17,7 @@ export const Context = createContext();
 const App = () => {
   const [context, setContext] = useState({
     players: [],
+    buttons: 'on',
   });
 
   return (

@@ -36,6 +36,12 @@ export const playerMessageHandler = (message, setContext) => {
           currentPlayerId: parsedMessage.id,
         }));
         break;
+      case 'buttons_off':
+        setContext((prevContext) => ({
+          ...prevContext,
+          buttons: 'off',
+        }));
+        break;
       default:
         console.log('incorrect action provided:', parsedMessage.action);
         break;

@@ -1,6 +1,7 @@
 import { hostMessageHandler, playerMessageHandler } from './actionHanlders';
 import { WS_ACTIONS, WS_REGISTRATION } from './constants';
 
+// host actions
 export const registerHost = (setContext) => {
   const ws = new WebSocket(WS_REGISTRATION.host);
 
@@ -8,6 +9,11 @@ export const registerHost = (setContext) => {
   ws.onmessage = (message) => hostMessageHandler(message, setContext);
 };
 
+export const disablePlayerButtons = (context) => {
+  context.hostWs.send(JSON.stringify({ action: WS_ACTIONS.buttonsOff }));
+};
+
+// player actions
 export const registerPlayer = (setContext) => {
   const ws = new WebSocket(WS_REGISTRATION.player);
   setContext((prevContext) => ({ ...prevContext, playerWs: ws }));
