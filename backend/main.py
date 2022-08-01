@@ -1,5 +1,6 @@
 import asyncio
 import json
+from multiprocessing.dummy import current_process
 from urllib.parse import urlparse
 from urllib.parse import parse_qs
 
@@ -9,6 +10,7 @@ import websockets
 players = {}
 players_connections = []
 host_connection = None
+current_question = None
 
 QUESTIONS_FILE = 'sample_questions.json'
 
@@ -27,7 +29,7 @@ async def handle_connection(connection):
       host_connection = connection
 
       questions = read_questions(QUESTIONS_FILE)
-      await host_connection.send(json.dumps({ 'action': 'questions', 'questions': questions }))
+      await host_connection.send(json.dumps({ 'action': 'send_questions', 'questions': questions }))
       print('host registered - questions sent to the host')
     case 'player':
       name = query_parameters['name'][0]
@@ -37,10 +39,10 @@ async def handle_connection(connection):
       players[player_id]['name'] = name
       players_connections.append(connection)
 
-      await host_connection.send(json.dumps({ 'action': 'players', 'players': players }))
-      await connection.send(json.dumps({ 'action': 'player_id', 'id': player_id }))
+      await host_connection.send(json.dumps({ 'action': 'send_players', 'players': players }))
+      await connection.send(json.dumps({ 'action': 'send_player_id', 'id': player_id }))
 
-      print('player registered')
+      print('player registered:', name)
     case _:
       print('incorrect connection type provided:', type)
 
@@ -51,10 +53,16 @@ async def handle_message(connection, message):
   action = parsed_message['action']
 
   match action:
-    case 'buttons_off':
+    case 'start_question':
+      global current_question
+      current_question = parsed_message['id']
       for connection in players_connections:
-        await connection.send(json.dumps({ 'action': 'buttons_off' }))
-      print('buttons disabled')
+        await connection.send(json.dumps({ 'action': 'start_question', 'question_id': current_question }))
+      print('question started:', current_question)
+    case 'end_question':
+      for connection in players_connections:
+        await connection.send(json.dumps({ 'action': 'end_question' }))
+      print('question ended')
     case _:
       print('incorrect message action provided:', action) 
 

@@ -11,6 +11,10 @@ export const registerHost = (setContext) => {
   connection.onmessage = (message) => messageHandler(message, setContext)
 }
 
-export const disablePlayerButtons = (context) => {
-  context.connection.send(JSON.stringify({ action: ACTIONS.buttonsOff }))
+export const startQuestion = (context, id) => {
+  context.connection.send(JSON.stringify({ action: ACTIONS.startQuestion, id }))
+}
+
+export const endQuestion = (context) => {
+  context.connection.send(JSON.stringify({ action: ACTIONS.endQuestion }))
 }

@@ -3,16 +3,24 @@ export const messageHandler = (message, setContext) => {
     const parsedMessage = JSON.parse(message.data)
 
     switch (parsedMessage.action) {
-      case 'player_id':
+      case 'send_player_id':
         setContext((prevContext) => ({
           ...prevContext,
-          currentPlayerId: parsedMessage.id,
+          playerId: parsedMessage.id,
         }))
         break
-      case 'buttons_off':
+      case 'start_question':
+        setContext((prevContext) => ({
+          ...prevContext,
+          buttons: 'on',
+          questionId: parsedMessage.question_id,
+        }))
+        break
+      case 'end_question':
         setContext((prevContext) => ({
           ...prevContext,
           buttons: 'off',
+          questionId: undefined,
         }))
         break
       default:

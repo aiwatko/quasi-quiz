@@ -1,10 +1,11 @@
 import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { Context } from '../App'
 import { QUESTION } from '../constants'
 import { colors } from '../materials/colors'
 import { spacing } from '../materials/spacing'
+import { startQuestion } from '../ws/actions'
 
 const Container = styled.div`
   display: flex;
@@ -27,15 +28,24 @@ const Subtitle = styled.h2`
   margin-bottom: ${spacing.xLarge};
 `
 
-const QuestionLink = styled(Link)`
+const QuestionLink = styled.button`
   color: ${colors.white};
   font-size: calc(15px + 1vw);
   margin-bottom: ${spacing.large};
+  background: transparent;
+  border: none;
 `
 
 export function Category() {
   const [context] = useContext(Context)
-  const { category, time } = context.currentQuestion
+  const navigate = useNavigate()
+  const { category, id, time } = context.questions[context.currentQuestion]
+
+  const handleClick = (e) => {
+    e.preventDefault()
+    startQuestion(context, id)
+    navigate(QUESTION)
+  }
 
   return (
     <Container>
@@ -43,7 +53,7 @@ export function Category() {
       <Subtitle>
         {`${time} seconds`}
       </Subtitle>
-      <QuestionLink to={QUESTION}>Go!</QuestionLink>
+      <QuestionLink onClick={handleClick}>Go!</QuestionLink>
     </Container>
   )
 }

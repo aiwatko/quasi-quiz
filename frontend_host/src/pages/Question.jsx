@@ -43,7 +43,7 @@ const Answer = styled.div`
 
 export function Question() {
   const [context] = useContext(Context)
-  const { question, answers, time } = context.currentQuestion
+  const { question, answers, time } = context.questions[context.currentQuestion]
 
   return (
     <PageContainer>

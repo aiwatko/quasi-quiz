@@ -9,7 +9,7 @@ export const Context = createContext()
 
 const App = () => {
   const [context, setContext] = useState({
-    buttons: 'on',
+    buttons: 'off',
   })
 
   return (

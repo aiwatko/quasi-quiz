@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import { disablePlayerButtons } from '../ws/actions'
+import { endQuestion } from '../ws/actions'
 import { Context } from '../App'
 
 export function Countdown({ time }) {
@@ -11,7 +11,7 @@ export function Countdown({ time }) {
     if (counter > 0) {
       setTimeout(() => setCounter(counter - 1), 1000)
     } else {
-      disablePlayerButtons(context)
+      endQuestion(context)
     }
   }, [counter])
 
