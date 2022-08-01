@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import { Context } from '../App'
 import { GAME } from '../constants'
 import { colors } from '../materials/colors'
 import { spacing } from '../materials/spacing'
-import { registerPlayer, sendPlayerName } from '../ws/actions'
+import { registerPlayer } from '../ws/actions'
 
 const Container = styled.div`
   display: flex;
@@ -46,18 +46,14 @@ const Button = styled.button`
 `
 
 export const Welcome = () => {
-  const [context, setContext] = useContext(Context)
+  const [_, setContext] = useContext(Context)
 
   const [name, setName] = useState('')
   const navigate = useNavigate()
 
-  useEffect(() => {
-    registerPlayer(setContext)
-  }, [])
-
   const handleSubmit = (e) => {
     e.preventDefault()
-    sendPlayerName(context, name)
+    registerPlayer(setContext, name)
     navigate(GAME)
   }
 

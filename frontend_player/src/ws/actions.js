@@ -1,19 +1,12 @@
 import { messageHandler } from './actionHanlders'
-import { ACTIONS, REGISTRATION } from './constants'
+import { REGISTRATION } from './constants'
 
-export const registerPlayer = (setContext) => {
-  const connection = new WebSocket(REGISTRATION)
+export const registerPlayer = (setContext, name) => {
+  const connection = new WebSocket(`${REGISTRATION}&name=${name}`)
   setContext((prevContext) => ({
     ...prevContext,
     connection,
   }))
 
   connection.onmessage = (message) => messageHandler(message, setContext)
-}
-
-export const sendPlayerName = (context, name) => {
-  context.connection.send(JSON.stringify({
-    action: ACTIONS.playerNameRegistration,
-    name,
-  }))
 }

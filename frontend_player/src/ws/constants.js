@@ -1,4 +1,2 @@
 export const REGISTRATION = `${process.env.REACT_APP_BACKEND_URL}/game?type=player`
-export const ACTIONS = {
-  playerNameRegistration: 'player_name_registration',
-}
+export const ACTIONS = {}

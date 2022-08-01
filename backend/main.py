@@ -18,7 +18,8 @@ def read_questions(file):
 
 
 async def handle_connection(connection):
-  type = parse_qs(urlparse(connection.path)[4])['type'][0]
+  query_parameters = parse_qs(urlparse(connection.path)[4])
+  type = query_parameters['type'][0]
   
   match type:
     case 'host':
@@ -29,7 +30,16 @@ async def handle_connection(connection):
       await host_connection.send(json.dumps({ 'action': 'questions', 'questions': questions }))
       print('host registered - questions sent to the host')
     case 'player':
-      players[str(connection.id)] = {}
+      name = query_parameters['name'][0]
+      player_id = str(connection.id)
+
+      players[player_id] = {}
+      players[player_id]['name'] = name
+      players_connections.append(connection)
+
+      await host_connection.send(json.dumps({ 'action': 'players', 'players': players }))
+      await connection.send(json.dumps({ 'action': 'player_id', 'id': player_id }))
+
       print('player registered')
     case _:
       print('incorrect connection type provided:', type)
@@ -41,15 +51,6 @@ async def handle_message(connection, message):
   action = parsed_message['action']
 
   match action:
-    case 'player_name_registration':
-      player_id = str(connection.id)
-      players[player_id]['name'] = parsed_message['name']
-      players_connections.append(connection)
-
-      global host_connection
-      await host_connection.send(json.dumps({ 'action': 'players', 'players': players }))
-      await connection.send(json.dumps({ 'action': 'player_id', 'id': player_id }))
-      print('player name registered')
     case 'buttons_off':
       for connection in players_connections:
         await connection.send(json.dumps({ 'action': 'buttons_off' }))
