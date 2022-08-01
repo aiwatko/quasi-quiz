@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { spacing } from '../materials/spacing'
 import { InputRadio } from '../components/InputRadio'
 import { Context } from '../App'
+import { sendAnswer } from '../ws/actions'
 
 const Container = styled.div`
     display: grid;
@@ -18,7 +19,9 @@ export const Play = () => {
   const [context] = useContext(Context)
 
   const handleClick = (e) => {
-    setSelectedInput(e.target.value)
+    const selectedAnswer = e.target.value
+    setSelectedInput(selectedAnswer)
+    sendAnswer(context, selectedAnswer)
   }
 
   return (

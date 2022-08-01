@@ -11,8 +11,12 @@ export const registerHost = (setContext) => {
   connection.onmessage = (message) => messageHandler(message, setContext)
 }
 
-export const startQuestion = (context, id) => {
+export const startQuestion = (context, setContext, id) => {
   context.connection.send(JSON.stringify({ action: ACTIONS.startQuestion, id }))
+  setContext((prevContext) => ({
+    ...prevContext,
+    answers: {},
+  }))
 }
 
 export const endQuestion = (context) => {

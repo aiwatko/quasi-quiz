@@ -37,13 +37,13 @@ const QuestionLink = styled.button`
 `
 
 export function Category() {
-  const [context] = useContext(Context)
+  const [context, setContext] = useContext(Context)
   const navigate = useNavigate()
   const { category, id, time } = context.questions[context.currentQuestion]
 
   const handleClick = (e) => {
     e.preventDefault()
-    startQuestion(context, id)
+    startQuestion(context, setContext, id)
     navigate(QUESTION)
   }
 

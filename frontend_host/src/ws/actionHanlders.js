@@ -16,6 +16,12 @@ export const messageHandler = (message, setContext) => {
           currentQuestion: 0,
         }))
         break
+      case 'send_answers':
+        setContext((prevContext) => ({
+          ...prevContext,
+          answers: parsedMessage.answers,
+        }))
+        break
       default:
         console.log('incorrect action provided:', parsedMessage.action)
         break

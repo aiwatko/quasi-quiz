@@ -11,10 +11,18 @@ players = {}
 players_connections = []
 host_connection = None
 current_question = None
+current_answers = {}
 
 QUESTIONS_FILE = 'sample_questions.json'
+ANSWERS_FILE = 'sample_answers.json'
+ANSWER_TO_INDEX = {
+  'A': 0,
+  'B': 1,
+  'C': 2,
+  'D': 3
+}
 
-def read_questions(file):
+def read_json_file(file):
   with open(file) as json_file:
     return json.load(json_file)
 
@@ -28,7 +36,7 @@ async def handle_connection(connection):
       global host_connection
       host_connection = connection
 
-      questions = read_questions(QUESTIONS_FILE)
+      questions = read_json_file(QUESTIONS_FILE)
       await host_connection.send(json.dumps({ 'action': 'send_questions', 'questions': questions }))
       print('host registered - questions sent to the host')
     case 'player':
@@ -62,7 +70,15 @@ async def handle_message(connection, message):
     case 'end_question':
       for connection in players_connections:
         await connection.send(json.dumps({ 'action': 'end_question' }))
+      await host_connection.send(json.dumps({ 'action': 'send_answers', 'answers': current_answers }))
       print('question ended')
+    case 'send_answer':
+      if current_question != parsed_message['question_id']:
+        print('🔴 current question mismatch between frontend and backend')
+      
+      correct_answer = read_json_file(ANSWERS_FILE)[current_question]
+      current_answers[parsed_message['player_id']] = correct_answer == ANSWER_TO_INDEX[parsed_message['answer']]
+      print('answer received')
     case _:
       print('incorrect message action provided:', action) 
 

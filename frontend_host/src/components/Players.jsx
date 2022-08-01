@@ -16,9 +16,16 @@ const Player = styled.div`
     ? `border: 2px solid ${colors.black};
       color: ${colors.black};`
     : `border: 2px solid ${colors.white};
-     color: ${colors.white};`)
-}
-  
+     color: ${colors.white};`)}
+  ${(props) => (props.answer === 'correct'
+    && `border: 2px solid ${colors.green};
+      background: ${colors.green};
+      color: ${colors.white};`)}
+  ${(props) => (props.answer === 'incorrect'
+    && `border: 2px solid ${colors.red};
+      background: ${colors.red};
+      color: ${colors.white};`)}
+
   padding: ${spacing.medium};
   flex: 1;
   font-weight: 800;
@@ -26,14 +33,30 @@ const Player = styled.div`
   text-align: center;
 `
 
+const ANSWER_TO_STYLE = {
+  [true]: 'correct',
+  [false]: 'incorrect',
+}
+
 export function Players({ variant }) {
   const [context] = useContext(Context)
+  const { players, answers } = context
 
   return (
     <PlayersContainer>
-      {Object.entries(context.players).map((player) => (
-        <Player variant={variant} key={player[0]}>{player[1].name}</Player>
-      ))}
+      {Object.entries(players).map((player) => {
+        const [id, details] = player
+
+        return (
+          <Player
+            variant={variant}
+            key={id}
+            answer={ANSWER_TO_STYLE[answers[id]]}
+          >
+            {details.name}
+          </Player>
+        )
+      })}
     </PlayersContainer>
   )
 }

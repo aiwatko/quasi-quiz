@@ -14,6 +14,7 @@ export const Context = createContext()
 function App() {
   const [context, setContext] = useState({
     players: [],
+    answers: {},
   })
 
   return (
